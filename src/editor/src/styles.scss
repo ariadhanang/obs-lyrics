@@ -1,0 +1,31 @@
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+
+@tailwind base;
+
+/* You can add global styles to this file, and also import other style files */
+
+form {
+	input[type="text"] {
+		background: transparent;
+		border-color: #ffffff22;
+		@apply text-gray-50 rounded-md;
+	}
+}
+
+button {
+	@apply px-4 py-2 bg-gray-600 text-gray-200 font-semibold rounded;
+
+	&.primary {
+		@apply bg-blue-600 text-blue-50 font-normal;		
+	}
+
+	&.small {
+		font-size: 0.9em;
+		@apply px-2 py-1;
+	}
+
+}

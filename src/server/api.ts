@@ -1,7 +1,7 @@
 import express 					from "express"
-import { Collection, ObjectId } from "mongodb"
+import { Collection, ObjectId, FindOneAndUpdateOption } from "mongodb"
 import database 				from './database'
-import { Lyric } 				from './lyric'
+import { Lyric } 				from '../types/lyric'
 
 const router = express.Router()
 var collection: Collection
@@ -79,10 +79,14 @@ router.put("/:id", (req, res) => {
 		})
 	}
 	// Update record
-	collection.findOneAndUpdate({ _id: new ObjectId(req.params.id) }, { $set: updatedFields })
+	collection.findOneAndUpdate(
+		{ _id: new ObjectId(req.params.id) },
+		{ $set: updatedFields },
+		{ returnDocument: "after" })
 		.then(result => {
 			return res.json({
 				message: `Update record with id ${req.params.id} success`,
+				data: result.value,
 				status: 200
 			})
 		})

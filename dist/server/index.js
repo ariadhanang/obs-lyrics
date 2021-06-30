@@ -6,13 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv_1 = __importDefault(require("dotenv"));
 var express_1 = __importDefault(require("express"));
 var http_1 = __importDefault(require("http"));
+var cors_1 = __importDefault(require("cors"));
 var database_1 = __importDefault(require("./database"));
 var api_1 = __importDefault(require("./api"));
 var socket_io_1 = require("socket.io");
-var lyric_1 = require("./lyric");
+var lyric_1 = require("../types/lyric");
 dotenv_1.default.config();
 var app = express_1.default();
 app.use(express_1.default.json());
+app.use(cors_1.default());
 var server = http_1.default.createServer(app);
 server.listen(process.env.PORT, function () {
     app.get('/', function (req, res) {

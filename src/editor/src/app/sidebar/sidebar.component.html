@@ -1,0 +1,24 @@
+<div id="sidebar" class="
+	flex flex-col h-full bg-gray-800
+">
+	
+	<header class="p-4">
+		<h1 class="text-xl font-bold text-gray-100">
+			OBS Lyrics
+			<span class="font-light text-gray-400">Editor</span>
+		</h1>
+	</header>
+
+	<div class="actions px-4 py-2">
+		<button>Create Lyric</button>
+	</div>
+
+	<nav class="flex-1">
+		<SidebarMenuItem *ngFor="let item of menu" [label]="item.title" [_id]="item._id"></SidebarMenuItem>
+	</nav>
+
+	<footer class="p-4 text-sm text-gray-400">
+		<p><a href="#" class="underline">Version 0.1.0</a>
+	</footer>
+
+</div>

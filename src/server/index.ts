@@ -1,15 +1,17 @@
 import dotenv		from 'dotenv'
 import express 		from 'express'
 import http 		from 'http'
+import cors			from 'cors'
 import database 	from './database'
 import APIRouter	from './api'
 import { Server }	from 'socket.io'
-import { Lyric } 	from './lyric'
+import { Lyric } 	from '../types/lyric'
 
 // Initial configuration
 dotenv.config()
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 // Create and run an HTTP server
 const server = http.createServer(app)

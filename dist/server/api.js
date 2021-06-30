@@ -73,10 +73,11 @@ router.put("/:id", function (req, res) {
             status: 500
         });
     }
-    collection.findOneAndUpdate({ _id: new mongodb_1.ObjectId(req.params.id) }, { $set: updatedFields })
+    collection.findOneAndUpdate({ _id: new mongodb_1.ObjectId(req.params.id) }, { $set: updatedFields }, { returnDocument: "after" })
         .then(function (result) {
         return res.json({
             message: "Update record with id " + req.params.id + " success",
+            data: result.value,
             status: 200
         });
     })
