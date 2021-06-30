@@ -19,8 +19,20 @@ form {
 button {
 	@apply px-4 py-2 bg-gray-600 text-gray-200 font-semibold rounded;
 
+	&:hover {
+		@apply bg-gray-500;
+	}
+
+	&:active {
+		opacity: 0.8;
+	}
+
 	&.primary {
-		@apply bg-blue-600 text-blue-50 font-normal;		
+		@apply bg-blue-600 text-blue-50 font-normal;
+
+		&:hover {
+			@apply bg-blue-500;
+		}
 	}
 
 	&.small {
