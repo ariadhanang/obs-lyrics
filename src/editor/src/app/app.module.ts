@@ -8,13 +8,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { SidebarMenuItemComponent } from './sidebar-menu-item/sidebar-menu-item.component';
 import { EditorComponent } from './editor/editor.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RemoteComponent } from './remote/remote.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     SidebarMenuItemComponent,
-    EditorComponent
+    EditorComponent,
+    RemoteComponent
   ],
   imports: [
     BrowserModule,

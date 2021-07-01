@@ -1,3 +1,17 @@
-<div id="app" class="w-screen h-screen bg-gray-50 overflow-hidden">
+<div id="app" class="relative w-screen h-screen bg-gray-900 overflow-hidden">
+
+	<div id="brand" class="absolute top-0 left-0 w-1/4 h-16 flex items-center justify-between p-4">
+		
+		<h1 class="text-xl font-bold text-gray-100">
+			OBS Lyrics
+		</h1>
+
+		<nav>
+			<a routerLinkActive="active" routerLink="/editor">Editor</a>
+			<a routerLinkActive="active" routerLink="/remote">Remote</a>
+		</nav>
+
+	</div>
+
 	<router-outlet></router-outlet>
 </div>
