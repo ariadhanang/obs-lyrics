@@ -1,51 +1,66 @@
-<div id="editor" class="w-full h-full flex flex-col bg-gray-900">
+<div id="editor" class="w-full h-full flex bg-gray-900">
 	
-	<div class="flex justify-between items-center pb-4 pt-8 px-8">
-		<h1 class="text-2xl font-semibold text-gray-200">{{ data.title }}</h1>
-		<div>
-			<button (click)="reset()">Reset</button> &nbsp;
-			<button class="primary" (click)="save()">Save</button>
+	<Sidebar [menu]="lyrics" class="w-1/4"></Sidebar>
+
+	<div *ngIf="id != undefined" id="editor-content" class="flex-1 h-full flex flex-col">
+		<div class="flex justify-between items-center pb-4 pt-8 px-8">
+			<div class="flex-1">
+				<button (click)="close()">Close</button>
+			</div>
+			<h1 class="flex-1 text-center text-xl font-semibold text-gray-200">
+				{{ id == "new" ? "Create New" : data.title }}
+			</h1>
+			<div class="flex-1 text-right">
+				<button *ngIf="id != 'new'" class="danger" (click)="delete()">Delete</button> &nbsp;
+				<button *ngIf="id != 'new'" (click)="reset()">Reset</button> &nbsp;
+				<button class="primary" (click)="save()">Save</button>
+			</div>
 		</div>
-	</div>
 
-	<form class="flex justify-between px-8">
-		<div class="control flex-1 mr-4">
-			<label class="block py-2 text-white">Title</label>
-			<input class="w-full" type="text" [(ngModel)]="edited.title" name="title">
+		<form class="flex justify-between px-8">
+			<div class="control flex-1 mr-4">
+				<label class="block py-2 text-white">Title</label>
+				<input class="w-full" type="text" [(ngModel)]="edited.title" name="title">
+			</div>
+			<div class="control flex-1">
+				<label class="block py-2 text-white">Category</label>
+				<input class="w-full" type="text" [(ngModel)]="edited.category" name="category">
+			</div>
+		</form>
+
+		<div class="flex justify-between items-center pb-4 pt-8 px-8">
+			<h2 class="text-lg font-semibold text-gray-200">Lyric Contents</h2>
+			<div class="flex">
+				<div class="text-gray-500 pr-4">
+					{{ edited.content.length + " row" }}{{(edited.content.length > 1) ? "s" : ""}}
+				</div>
+				<button class="small" (click)="addRow()">
+					<fa-icon [icon]="iconPlus" class="mr-2"></fa-icon> Add Row
+				</button>
+			</div>
 		</div>
-		<div class="control flex-1">
-			<label class="block py-2 text-white">Category</label>
-			<input class="w-full" type="text" [(ngModel)]="edited.category" name="category">
-		</div>
-	</form>
 
-	<div class="flex justify-between items-center pb-4 pt-8 px-8">
-		<h2 class="text-lg font-semibold text-gray-200">Lyric Contents</h2>
-		<div>
-			<button class="small" (click)="addRow()"><fa-icon [icon]="iconPlus"></fa-icon> Add Row</button>
-		</div>
-	</div>
+		<div class="flex-1">
+			<div class="h-full overflow-y-auto relative">
+				<div class="w-full h-full absolute p-8" style="max-height: 100%;">
 
-	<div class="flex-1">
-		<div class="h-full overflow-y-auto relative">
-			<div class="w-full h-full absolute px-4 pb-4" style="max-height: 100%;">
+					<form *ngFor="let item of edited.content" class="flex mb-4 bg-gray-800 rounded-md">
+						<div class="w-6">
+							<div class="p-2 text-gray-400 font-semibold">{{ item.index }}</div>
+						</div>
+						<div class="w-full p-4">
+							<input class="w-full mb-2" type="text" [(ngModel)]="item.title" name="title-{{ item.index }}" placeholder="Title">
+							<input class="w-full mb-2" type="text" [(ngModel)]="item.headline" name="headline-{{ item.index }}" placeholder="Headline">
+							<input class="w-full" type="text" [(ngModel)]="item.text" name="text-{{ item.index }}" placeholder="Text">
+						</div>
+						<div class="p-2">
+							<button class="small" (click)="deleteRow(item.index)"><fa-icon [icon]="iconRemove"></fa-icon></button>
+						</div>
+					</form>
 
-				<form *ngFor="let item of edited.content" class="flex mb-4 bg-gray-800 rounded-md">
-					<div class="w-6">
-						<div class="p-2 text-gray-400 font-semibold">{{ item.index }}</div>
-					</div>
-					<div class="w-full p-4">
-						<input class="w-full mb-2" type="text" [(ngModel)]="item.title" name="title-{{ item.index }}" placeholder="Title">
-						<input class="w-full mb-2" type="text" [(ngModel)]="item.headline" name="headline-{{ item.index }}" placeholder="Headline">
-						<input class="w-full" type="text" [(ngModel)]="item.text" name="text-{{ item.index }}" placeholder="Text">
-					</div>
-					<div class="p-2">
-						<button class="small" (click)="deleteRow(item.index)"><fa-icon [icon]="iconRemove"></fa-icon></button>
-					</div>
-				</form>
+					<br>
 
-				<br>
-
+				</div>
 			</div>
 		</div>
 	</div>

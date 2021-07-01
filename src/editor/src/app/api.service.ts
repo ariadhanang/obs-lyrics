@@ -17,6 +17,10 @@ export class API {
 	getLyricsIndex() {
 		return this.http.get<Lyric[]>(this.hostUrl + 'lyrics/')
 	}
+
+	storeLyric(data: Lyric) {
+		return this.http.post<APIResponse>(this.hostUrl + 'lyrics', data)
+	}
 	
 	getLyric(id: string) {
 		return this.http.get<APIResponse>(this.hostUrl + 'lyrics/' + id)	
@@ -24,6 +28,10 @@ export class API {
 
 	updateLyric(id: string, data: Lyric) {
 		return this.http.put<APIResponse>(this.hostUrl + 'lyrics/' + id, data)	
+	}
+
+	deleteLyric(id: string) {
+		return this.http.delete<APIResponse>(this.hostUrl + 'lyrics/' + id)
 	}
 
 }

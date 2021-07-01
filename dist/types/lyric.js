@@ -19,9 +19,16 @@ var Lyric = (function () {
 exports.Lyric = Lyric;
 var LyricContent = (function () {
     function LyricContent(data) {
-        this.title = data.title ? data.title : "";
-        this.headline = data.headline ? data.headline : "";
-        this.text = data.text ? data.text : "";
+        this.index = 0;
+        this.title = "";
+        this.headline = "";
+        this.text = "";
+        if (data !== undefined) {
+            this.index = data.index ? data.index : 0;
+            this.title = data.title ? data.title : "";
+            this.headline = data.headline ? data.headline : "";
+            this.text = data.text ? data.text : "";
+        }
     }
     return LyricContent;
 }());

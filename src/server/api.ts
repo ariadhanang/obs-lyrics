@@ -14,7 +14,7 @@ function init() {
 router.get("/", (req, res) => {
 	init()
 	const options = { fields: { content: 0 } }
-	collection.find({}, options).toArray()
+	collection.find({}, options).sort({ title: 1 }).toArray()
 		.then(result => {
 			return res.json(result)
 		})
@@ -26,11 +26,15 @@ router.get("/", (req, res) => {
 // Store
 router.post("/", (req, res) => {
 	init()
-	collection.insertOne(req.body)
+	var data = req.body
+	data._id = undefined
+	collection.insertOne(data)
 		.then(result => {
+			console.log(result)
 			return res.json({
 				message: `Create new record success`,
-				status: 200
+				status: 200,
+				data: result
 			})
 		})
 		.catch(err => {

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Lyric } from "../../../../types/lyric"
 
 @Component({
@@ -11,9 +12,19 @@ export class SidebarComponent implements OnInit {
 	@Input()
 	menu: Lyric[] = []
 
-	constructor() { }
+	activeTab = "lyrics"
+
+	constructor(private router: Router) { }
 
 	ngOnInit(): void {
+	}
+
+	createNew() {
+		this.router.navigate(['/editor', 'new'])
+	}
+
+	navigateTab(destination: string) {
+		this.activeTab = destination
 	}
 
 }

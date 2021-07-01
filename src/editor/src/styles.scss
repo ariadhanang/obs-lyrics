@@ -8,6 +8,10 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+body {
+	font-size: 14px;
+}
+
 form {
 	input[type="text"] {
 		background: transparent;
@@ -16,7 +20,7 @@ form {
 	}
 }
 
-button {
+button:not(.tab) {
 	@apply px-4 py-2 bg-gray-600 text-gray-200 font-semibold rounded;
 
 	&:hover {
@@ -28,10 +32,18 @@ button {
 	}
 
 	&.primary {
-		@apply bg-blue-600 text-blue-50 font-normal;
+		@apply bg-blue-600 text-blue-50;
 
 		&:hover {
 			@apply bg-blue-500;
+		}
+	}
+
+	&.danger {
+		@apply bg-red-600 text-red-50;
+
+		&:hover {
+			@apply bg-red-500;
 		}
 	}
 
@@ -40,4 +52,34 @@ button {
 		@apply px-2 py-1;
 	}
 
+}
+
+nav.tabs {
+	@apply flex;
+	box-shadow: inset 0 -1px #ffffff11;
+
+	button.tab {
+		@apply flex-1 p-4;
+		@apply text-gray-200 font-semibold uppercase;
+
+		border-right: 1px solid #ffffff11;
+
+		&:last-child {
+			border-right: 0px
+		}
+
+		&:hover {
+			@apply text-gray-100;
+			box-shadow: inset 0 -4px #ffffff11;
+		}
+
+		&:active {
+			opacity: 0.8;
+		}
+	}
+
+	button.tab.active {
+		@apply text-gray-100;
+		box-shadow: inset 0 -4px #1c4ed8;
+	}
 }

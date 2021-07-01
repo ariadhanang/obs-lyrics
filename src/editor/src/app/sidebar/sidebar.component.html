@@ -2,20 +2,40 @@
 	flex flex-col h-full bg-gray-800
 ">
 	
-	<header class="p-4">
-		<h1 class="text-xl font-bold text-gray-100">
+	<header>
+		<h1 class="p-4 text-xl font-bold text-gray-100">
 			OBS Lyrics
 			<span class="font-light text-gray-400">Editor</span>
 		</h1>
+		<nav class="tabs">
+			<button class="tab" (click)="navigateTab('lyrics')" [ngClass]="{'active' : activeTab == 'lyrics'}">
+				Lyrics
+			</button>
+			<button class="tab" (click)="navigateTab('collections')" [ngClass]="{'active' : activeTab == 'collections'}">
+				Collections
+			</button>
+		</nav>
 	</header>
 
-	<div class="actions px-4 py-2">
-		<button>Create Lyric</button>
+	<!-- Lyrics -->
+	<div class="flex-1" *ngIf="activeTab == 'lyrics'">
+		<div class="actions p-4">
+			<button (click)="createNew()">Create Lyric</button>
+		</div>
+
+		<nav>
+			<SidebarMenuItem *ngFor="let item of menu" [label]="item.title" [_id]="item._id"></SidebarMenuItem>
+		</nav>
 	</div>
 
-	<nav class="flex-1">
-		<SidebarMenuItem *ngFor="let item of menu" [label]="item.title" [_id]="item._id"></SidebarMenuItem>
-	</nav>
+	<!-- Collections -->
+	<div class="flex-1" *ngIf="activeTab == 'collections'">
+		<div class="actions p-4">
+			<button (click)="createNew()">Create Collection</button>
+		</div>
+
+		<nav></nav>
+	</div>
 
 	<footer class="p-4 text-sm text-gray-400">
 		<p><a href="#" class="underline">Version 0.1.0</a>
