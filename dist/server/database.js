@@ -45,8 +45,8 @@ dotenv_1.default.config();
 var options = {
     useUnifiedTopology: true
 };
-var dbHost = process.env.DB_HOST ? process.env.DB_HOST : "mongodb://localhost:27017/";
-var dbName = process.env.DB_NAME ? process.env.DB_NAME : "lyrics";
+var host = process.env.DB_HOST ? process.env.DB_HOST : "mongodb://localhost:27017/";
+var name = process.env.DB_NAME ? process.env.DB_NAME : "lyrics";
 var Database = (function () {
     function Database() {
     }
@@ -59,11 +59,11 @@ var Database = (function () {
                         if (this.db)
                             return [2, this.db];
                         _a = this;
-                        return [4, mongodb_1.MongoClient.connect(dbHost, options)];
+                        return [4, mongodb_1.MongoClient.connect(host, options)];
                     case 1:
                         _a.connection = _b.sent();
-                        this.db = this.connection.db(dbName);
-                        console.log("[database] is connected to " + dbName);
+                        this.db = this.connection.db(name);
+                        console.log("[database] is connected to " + name);
                         return [2, this.db];
                 }
             });

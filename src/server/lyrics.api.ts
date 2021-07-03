@@ -1,7 +1,6 @@
 import express 					from "express"
-import { Collection, ObjectId, FindOneAndUpdateOption } from "mongodb"
-import database 				from './database'
-import { Lyric } 				from '../types/lyric'
+import { Collection, ObjectId } from "mongodb"
+import database 				from "./database"
 
 const router = express.Router()
 var collection: Collection
@@ -11,6 +10,7 @@ function init() {
 }
 
 // Index
+// Get all lyrics without content
 router.get("/", (req, res) => {
 	init()
 	const options = { fields: { content: 0 } }
@@ -19,18 +19,22 @@ router.get("/", (req, res) => {
 			return res.json(result)
 		})
 		.catch(err => {
-			console.error(err)
+			return res.json({
+				message: `Get all records failed`,
+				status: 500,
+				data: err
+			})
 		})
 })
 
 // Store
+// Create new record
 router.post("/", (req, res) => {
 	init()
 	var data = req.body
 	data._id = undefined
 	collection.insertOne(data)
 		.then(result => {
-			console.log(result)
 			return res.json({
 				message: `Create new record success`,
 				status: 200,
@@ -38,15 +42,16 @@ router.post("/", (req, res) => {
 			})
 		})
 		.catch(err => {
-			console.error(err)
 			return res.json({
 				message: `Create new record failed`,
-				status: 500
+				status: 500,
+				data: err
 			})
 		})
 })
 
 // Show
+// Get specific record by id
 router.get("/:id", (req, res) => {
 	init()
 	collection.findOne({ _id: new ObjectId(req.params.id) })
@@ -58,7 +63,6 @@ router.get("/:id", (req, res) => {
 			})
 		})
 		.catch(err => {
-			console.error(err)
 			return res.json({
 				message: `Get record with id ${req.params.id} error`,
 				error: err,
@@ -68,6 +72,7 @@ router.get("/:id", (req, res) => {
 })
 
 // Update
+// Modify specific record by id
 router.put("/:id", (req, res) => {
 	init()
 	var updatedFields: any = {}
@@ -95,7 +100,6 @@ router.put("/:id", (req, res) => {
 			})
 		})
 		.catch(err => {
-			console.error(err)
 			return res.json({
 				message: `Update record with id ${req.params.id} error`,
 				error: err,
@@ -104,7 +108,8 @@ router.put("/:id", (req, res) => {
 		})
 })
 
-// Delete
+// Destroy
+// Delete specific record by id
 router.delete("/:id", (req, res) => {
 	init()
 	collection.deleteOne({ _id: new ObjectId(req.params.id) })

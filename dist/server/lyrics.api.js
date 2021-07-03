@@ -19,7 +19,11 @@ router.get("/", function (req, res) {
         return res.json(result);
     })
         .catch(function (err) {
-        console.error(err);
+        return res.json({
+            message: "Get all records failed",
+            status: 500,
+            data: err
+        });
     });
 });
 router.post("/", function (req, res) {
@@ -28,7 +32,6 @@ router.post("/", function (req, res) {
     data._id = undefined;
     collection.insertOne(data)
         .then(function (result) {
-        console.log(result);
         return res.json({
             message: "Create new record success",
             status: 200,
@@ -36,10 +39,10 @@ router.post("/", function (req, res) {
         });
     })
         .catch(function (err) {
-        console.error(err);
         return res.json({
             message: "Create new record failed",
-            status: 500
+            status: 500,
+            data: err
         });
     });
 });
@@ -54,7 +57,6 @@ router.get("/:id", function (req, res) {
         });
     })
         .catch(function (err) {
-        console.error(err);
         return res.json({
             message: "Get record with id " + req.params.id + " error",
             error: err,
@@ -86,7 +88,6 @@ router.put("/:id", function (req, res) {
         });
     })
         .catch(function (err) {
-        console.error(err);
         return res.json({
             message: "Update record with id " + req.params.id + " error",
             error: err,

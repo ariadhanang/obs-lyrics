@@ -5,17 +5,16 @@ export class Lyric {
 	content: LyricContent[]
 
 	constructor(data?: any) {
-
-		this._id 		= ""
-		this.title 		= ""
-		this.category 	= ""
-		this.content 	= new Array<LyricContent>()
-
 		if (data !== undefined) {
-			this._id 		= data._id 		? data._id 		: ""
-			this.title 		= data.title 	? data.title 	: ""
-			this.category 	= data.category ? data.category : ""
-			this.content 	= data.content 	? data.content 	: []
+			this._id 		= data._id 							? data._id 		: ""
+			this.title 		= data.title 						? data.title 	: ""
+			this.category 	= data.category 					? data.category : ""
+			this.content 	= data.content as LyricContent[] 	? data.content 	: new Array<LyricContent>()
+		} else {
+			this._id = ""
+			this.title = ""
+			this.category = ""
+			this.content = new Array<LyricContent>()
 		}
 	}
 }

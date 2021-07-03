@@ -1,1 +1,77 @@
-<p>remote works!</p>
+<div id="editor" class="w-full h-full flex">
+
+	<!-- Sidebar control -->
+	<div class="sidebar translucent flex flex-col w-1/4 h-full">
+		<header class="pt-16">
+			<!-- Connection monitor -->
+			<div class="p-4 text-gray-200">
+				<div *ngIf="isConnected" class="flex justify-between bg-gray-900 p-3 rounded">
+					<div>
+						<fa-icon [icon]="connectedIcon" class="mr-2 text-green-500"></fa-icon> Connected to server
+					</div>
+				</div>
+				<div *ngIf="!isConnected" class="flex justify-between">
+					<div>
+						<fa-icon [icon]="disconnectedIcon" class="mr-2 text-red-500"></fa-icon> Disconnected from server
+					</div>
+					<button class="small">Connect</button>
+				</div>
+			</div>
+			<!-- Tabs -->
+			<nav class="tabs">
+				<button class="tab" [ngClass]="{'active': activeTab == 'lyrics'}">
+					<fa-icon class="mr-3" [icon]="lyricsIcon"></fa-icon> Lyrics
+				</button>
+				<button class="tab" [ngClass]="{'active': activeTab == 'media'}">
+					<fa-icon class="mr-3" [icon]="mediaIcon"></fa-icon> Media
+				</button>
+			</nav>
+		</header>
+		
+		<!-- Sidebar content -->
+		<div class="flex-1 relative">
+			<div class="absolute top-0 left-0 w-full h-full overflow-y-auto">
+				
+				<!-- Lyrics tab content -->
+				<nav class="sidebar-menu">
+					<button *ngFor="let lyric of lyrics" (click)="selectLyric(lyric._id)" class="sidebar-menu-item" [ngClass]="{'active': selectedLyric._id == lyric._id}">
+						{{ lyric.title }}
+					</button>
+				</nav>
+				
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Lyrics content selector -->
+	<div *ngIf="selectedLyric._id" class="relative w-1/2 h-full text-gray-100 overflow-y-auto">
+		
+		<header class="h-16 p-4 absolute top-4 left-4 right-4 flex items-center justify-between rounded card-lifted" style="z-index: 9999;">
+			<h2 class="text-lg font-semibold">{{ selectedLyric.title }}</h2>
+			<div>
+				<button class="plain" (click)="beginLyric()">Begin</button>
+			</div>
+		</header>
+
+		<div class="w-full h-full p-4 pt-24 overflow-y-auto">
+			
+			<div *ngFor="let row of selectedLyric.content" class="card p-4 mb-4 flex items-center justify-between rounded">
+				<div class="w-8 text-gray-600">{{ row.index }}</div>
+				<div class="flex-1 text-gray-200">
+					<h3 class="text-lg mb-2">{{ row.title }}</h3>
+					<h4 class="mb-2 text-gray-300">{{ row.headline }}</h4>
+					<h5 class="text-sm text-gray-300">{{ row.text }}</h5>
+				</div>
+				<div class="pl-4">
+					<button class="plain" (click)="broadcastLyric(row)">
+						<fa-icon [icon]="broadcastIcon"></fa-icon>
+					</button>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

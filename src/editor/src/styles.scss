@@ -9,7 +9,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-	font-size: 14px;
+	// font-size: 14px;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	height: 100vh;
+	width: 100vw;
+	background: linear-gradient(to bottom, #12100e, #2b4162)
 }
 
 form {
@@ -20,8 +24,8 @@ form {
 	}
 }
 
-button:not(.tab) {
-	@apply px-4 py-2 bg-gray-600 text-gray-200 font-semibold rounded;
+button:not(.tab, .sidebar-menu-item) {
+	@apply px-4 py-2 bg-gray-600 text-gray-200 rounded;
 
 	&:hover {
 		@apply bg-gray-500;
@@ -33,6 +37,8 @@ button:not(.tab) {
 
 	&.primary {
 		@apply bg-blue-600 text-blue-50;
+		@apply card;
+		background: transparent linear-gradient(to bottom, #1c4ed8dd, #1c4ed866);
 
 		&:hover {
 			@apply bg-blue-500;
@@ -47,6 +53,16 @@ button:not(.tab) {
 		}
 	}
 
+	&.plain {
+		box-shadow: 0 2px 4px rgba(0,0,0,.2), inset 1px 1px 0 rgba(255,255,255,.03), inset 1px 1px 3px rgba(255,255,255,.01);
+		background: transparent linear-gradient(to bottom, #ffffff06, #ffffff00);
+
+		&:hover {
+			box-shadow: 0 2px 8px rgba(0,0,0,.2), inset 1px 1px 0 rgba(255,255,255,.03), inset 1px 1px 3px rgba(255,255,255,.01);
+			background-color: #ffffff11;
+		}
+	}
+
 	&.small {
 		font-size: 0.9em;
 		@apply px-2 py-1;
@@ -54,13 +70,15 @@ button:not(.tab) {
 
 }
 
+// Tabs
+
 nav.tabs {
 	@apply flex;
 	box-shadow: inset 0 -1px #ffffff11;
 
 	button.tab {
 		@apply flex-1 p-4;
-		@apply text-gray-200 font-semibold uppercase;
+		@apply text-gray-200 font-semibold uppercase text-sm;
 
 		border-right: 1px solid #ffffff11;
 
@@ -82,4 +100,43 @@ nav.tabs {
 		@apply text-gray-100;
 		box-shadow: inset 0 -4px #1c4ed8;
 	}
+}
+
+// Sidebar Menu
+nav.sidebar-menu {
+	@apply p-4;
+
+	.sidebar-menu-item {
+
+		cursor: pointer;
+		@apply block w-full px-4 py-3 text-gray-50 text-left rounded;
+		
+		&:hover {
+			@apply bg-gray-800 card;
+		}
+		
+		&:active {
+			opacity: 0.8;
+		}
+
+		&.active {
+			@apply card font-semibold;
+			background: linear-gradient(to right, #1c4ed8dd, #1c4ed866);
+		}
+	}
+}
+
+.translucent {
+	background: #11182744;
+	@apply backdrop-filter backdrop-blur;
+}
+
+.card {
+	box-shadow: 0 4px 12px rgba(0,0,0,.2), inset 1px 1px 0 rgba(255,255,255,.03), inset 1px 1px 6px rgba(255,255,255,.01);
+	@apply backdrop-filter backdrop-blur;
+}
+
+.card-lifted {
+	box-shadow: 0 4px 12px rgba(0,0,0,.2), 0 0 20px rgba(0,0,0,.1), inset 1px 1px 0 rgba(255,255,255,.03), inset 1px 1px 6px rgba(255,255,255,.01);
+	@apply backdrop-filter backdrop-blur;
 }

@@ -3,15 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LyricContent = exports.Lyric = void 0;
 var Lyric = (function () {
     function Lyric(data) {
-        this._id = "";
-        this.title = "";
-        this.category = "";
-        this.content = new Array();
         if (data !== undefined) {
             this._id = data._id ? data._id : "";
             this.title = data.title ? data.title : "";
             this.category = data.category ? data.category : "";
-            this.content = data.content ? data.content : [];
+            this.content = data.content ? data.content : new Array();
+        }
+        else {
+            this._id = "";
+            this.title = "";
+            this.category = "";
+            this.content = new Array();
         }
     }
     return Lyric;
