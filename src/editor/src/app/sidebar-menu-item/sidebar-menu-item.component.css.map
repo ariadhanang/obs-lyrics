@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,SAAS,CAAT,IAAS;AAET,AAAA,kBAAkB,CAAC;EAClB,MAAM,CAAN,YAAM;CAON;;AARD,AAEC,kBAFiB,AAEhB,MAAM,CAAC;EACP,MAAM,CAAN,WAAM;CACN;;AAJF,AAKC,kBALiB,AAKhB,OAAO,CAAC;EACR,OAAO,EAAE,GAAG;CACZ;;AAGF,AAAA,kBAAkB,AAAA,OAAO,CAAC;EACzB,MAAM,CAAN,sCAAM;CACN",
+    "sources": [
+        "sidebar-menu-item.component.scss"
+    ],
+    "names": [],
+    "file": "sidebar-menu-item.component.css"
+}

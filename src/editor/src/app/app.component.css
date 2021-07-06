@@ -1,0 +1,21 @@
+#brand nav {
+  @apply flex;
+}
+
+#brand nav a {
+  @apply p-2;
+  @apply text-gray-500 text-lg font-light;
+}
+
+#brand nav a:hover {
+  @apply text-gray-200;
+}
+
+#brand nav a:active {
+  opacity: 0.8;
+}
+
+#brand nav a.active {
+  @apply text-gray-50	font-normal;
+}
+/*# sourceMappingURL=app.component.css.map */

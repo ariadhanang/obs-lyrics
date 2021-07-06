@@ -1,0 +1,341 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+.lg-only {
+  display: none;
+}
+
+#client-remote {
+  min-height: 100%;
+  font-family: "Montserrat", sans-serif;
+  color: #eee;
+  text-align: center;
+  background: linear-gradient(to bottom, #2a5470, #4c4177);
+}
+
+#client-remote .container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#client-remote #app-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  line-height: 20px;
+  z-index: 9999;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(to bottom, #2a547055, #4c417755);
+  background-size: 100vw 100vh;
+  background-position: top center;
+}
+
+#client-remote #app-bar .title {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+#client-remote #app-bar #back-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 60px;
+  padding: 20px;
+  color: #fff;
+  background: transparent;
+  border: none;
+}
+
+#client-remote #app-bar #back-button:active {
+  background: #00000022;
+  opacity: 0.8;
+}
+
+#client-remote #app-bar #back-button:focus {
+  outline: none;
+}
+
+#client-remote #lyrics {
+  flex: 1;
+  display: block;
+  height: 100vh;
+}
+
+#client-remote #lyrics #page-lyrics {
+  padding: 80px 20px 160px;
+  height: 100%;
+}
+
+#client-remote #lyrics #page-lyric {
+  padding: 80px 20px 160px;
+  height: 100%;
+}
+
+#client-remote #lyrics p {
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+#client-remote #lyrics ul.lyrics-list {
+  padding: 0;
+  list-style: none;
+}
+
+#client-remote #lyrics ul.lyrics-list li {
+  padding: 20px 0;
+  font-size: 1.3em;
+  border-top: 1px solid #ffffff44;
+  border-bottom: 1px solid #ffffff44;
+}
+
+#client-remote #lyrics ul.lyrics-list li:hover {
+  background-color: #ffffff11;
+}
+
+#client-remote #lyrics ul.lyrics-list li:active {
+  outline: none;
+  opacity: 0.7;
+}
+
+#client-remote #lyrics ul.lyrics-list li:focus {
+  outline: none;
+}
+
+#client-remote #lyrics ul.lyrics-list li:first-child {
+  border-top: 2px solid #ffffff44;
+}
+
+#client-remote #lyrics ul.lyrics-list li:last-child {
+  border-bottom: 2px solid #ffffff44;
+}
+
+#client-remote #lyrics ul.lyrics-content {
+  padding: 0;
+  list-style: none;
+}
+
+#client-remote #lyrics ul.lyrics-content li {
+  margin-bottom: 20px;
+  padding: 0;
+  font-size: 1em;
+  text-align: left;
+  display: flex;
+  border-radius: 8px;
+}
+
+#client-remote #lyrics ul.lyrics-content li .index {
+  width: 30px;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+#client-remote #lyrics ul.lyrics-content li .content {
+  flex: 1;
+  padding: 20px;
+}
+
+#client-remote #lyrics ul.lyrics-content li .content .title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+#client-remote #lyrics ul.lyrics-content li .content .headline {
+  font-size: 0.9em;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+#client-remote #lyrics ul.lyrics-content li .content .text {
+  font-size: 0.9em;
+}
+
+#client-remote #lyrics ul.lyrics-content li:hover {
+  background-color: #ffffff06;
+}
+
+#client-remote #lyrics ul.lyrics-content li:active {
+  outline: none;
+  opacity: 0.7;
+  background-color: #00000006;
+}
+
+#client-remote #lyrics ul.lyrics-content li:focus {
+  outline: none;
+}
+
+#client-remote #lyrics ul.lyrics-content li.active {
+  background: linear-gradient(to right, #ffffff22, #ffffff06);
+}
+
+#client-remote #control {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  z-index: 9998;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(to bottom, #2a547055, #4c417755);
+  background-size: 100vw 100vh;
+  background-position: bottom center;
+}
+
+#client-remote #control button.remote-button {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 10px;
+  font-size: 1.2em;
+}
+
+#client-remote #control button.remote-button.large {
+  width: 80px;
+  height: 80px;
+  font-size: 1.4em;
+}
+
+#client-remote #control button.remote-button:active {
+  opacity: 0.6;
+  outline: none;
+}
+
+#client-remote #control button.remote-button:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 1023px) {
+  #client-remote #lyrics {
+    position: relative;
+  }
+  #client-remote #lyrics #page-lyrics {
+    opacity: 1;
+    transition: all 0.3s ease-out;
+  }
+  #client-remote #lyrics #page-lyric {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    transform: translateX(100vw);
+    transition: all 0.3s ease-out;
+  }
+  #client-remote #lyrics.open #page-lyrics {
+    opacity: 0;
+  }
+  #client-remote #lyrics.open #page-lyric {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .sm-only {
+    display: none;
+  }
+  .lg-only {
+    display: block;
+  }
+  #client-remote #app-bar {
+    padding-left: 340px;
+  }
+  #client-remote #app-bar #back-button {
+    right: 0;
+    left: unset;
+  }
+  #client-remote #lyrics {
+    display: flex;
+    flex-direction: row;
+    max-height: 100vh;
+    padding: 0;
+  }
+  #client-remote #lyrics #page-lyrics {
+    position: relative;
+    min-width: 320px;
+    height: 100vh;
+    padding: 80px 20px 80px;
+    text-align: left;
+  }
+  #client-remote #lyrics #page-lyrics p {
+    padding-left: 20px;
+  }
+  #client-remote #lyrics #page-lyrics::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 60px;
+    bottom: 100px;
+    right: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, #ffffff22, #ffffff00);
+  }
+  #client-remote #lyrics #page-lyrics ul.lyrics-list li {
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 6px;
+  }
+  #client-remote #lyrics #page-lyrics ul.lyrics-list li.active {
+    font-weight: 600;
+    background: linear-gradient(to right, #ffffff33, #ffffff11);
+  }
+  #client-remote #lyrics #page-lyric {
+    flex: 1;
+    height: 100vh;
+    padding: 80px 20px 120px;
+    overflow-y: auto;
+  }
+  #client-remote #control {
+    padding: 20px;
+    padding-left: 340px;
+  }
+  #client-remote #control::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 320px;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, #ffffff00, #ffffff22, #ffffff00);
+  }
+  #client-remote #control::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 320px;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, #ffffff00, #ffffff06, #ffffff00);
+  }
+  #client-remote #control button.remote-button {
+    margin: 0 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+  }
+  #client-remote #control button.remote-button.large {
+    width: 60px;
+    height: 60px;
+  }
+}
+/*# sourceMappingURL=remote.css.map */

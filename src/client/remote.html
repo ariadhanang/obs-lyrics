@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Remote</title>
+	<link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="./remote.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+	<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body id="client-remote">
+	
+	<div class="container">
+		<div id="app-bar">
+			<button v-if="page == 'lyric-detail'" id="back-button" v-on:click="back()">
+				<i class="sm-only fas fa-arrow-left"></i>
+			</button>
+			<span class="title">{{ title }}</span>
+		</div>
+
+		<div id="lyrics" v-bind:class="{ open: page == 'lyric-detail' }">
+			<!-- Lyrics Page -->
+			<div id="page-lyrics">
+				<p>Lyrics</p>
+				<ul class="lyrics-list">
+					{{ status }}
+					<li v-for="row in lyricList" :key="row._id" v-on:click="selectLyric(row._id)" v-bind:class="{ active: selectedLyric ? (row._id == selectedLyric._id) : false }">
+						{{ row.title }}
+					</li>
+				</ul>
+			</div>
+			<!-- Lyric Page -->
+			<div id="page-lyric">
+				<ul v-if="selectedLyric"  class="lyrics-content">
+					<li :id="'content-' + row.index" v-for="row in selectedLyric.content" :key="row.index" v-on:click="selectContent(row)" v-bind:class="{ active: selectedContent ? (row.index == selectedContent.index) : false }">
+						<div class="index">{{ row.index }}</div>
+						<div class="content">
+							<div class="title">{{ row.title }}</div>
+							<div class="headline">{{ row.headline }}</div>
+							<div class="text">{{ row.text }}</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="control">
+			<button v-on:click="previous()" class="remote-button" id="control-prev">
+				<i class="fas fa-step-backward"></i>
+			</button>
+			<button v-on:click="next()" class="remote-button large" id="control-next">
+				<i class="fas fa-step-forward"></i>
+			</button>
+			<button v-on:click="stop()" class="remote-button" id="control-clear">
+				<i class="fas fa-stop"></i>
+			</button>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="./remote.js"></script>
+
+</body>
+</html>
