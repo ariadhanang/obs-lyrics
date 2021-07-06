@@ -28,6 +28,9 @@ server.listen(process.env.PORT, function () {
     app.get('/remote', function (req, res) {
         res.sendFile(path_1.default.resolve(clientPath + 'remote.html'));
     });
+    app.get('/display', function (req, res) {
+        res.sendFile(path_1.default.resolve(clientPath + 'display.html'));
+    });
     console.log("[http] running on port " + process.env.PORT);
 });
 database_1.default.open()

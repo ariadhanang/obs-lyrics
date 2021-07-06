@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
+
+$font-body: "Montserrat", sans-serif;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    font-family: $font-body;
+    font-size: 2.5vh;
+}
+
+#lyric-title {
+    position: absolute;
+    right: 5vh;
+    top: 5vh;
+    padding: 3vh 5vh;
+    max-width: 65vw;
+    text-align: right;
+    color: #fff;
+    font-weight: 600;
+    background-color: #000000bb;
+}
+
+#lyric-content {
+    position: absolute;
+    right: 5vh;
+    bottom: 5vh;
+    padding: 5vh;
+    max-width: 65vw;
+    text-align: right;
+    color: #fff;
+    background-color: #000000bb;
+
+    .title {
+        font-size: 1.5em;
+        margin-bottom: 2vh;
+    }
+    .headline {
+        font-size: 1.1em;
+        margin-bottom: 2vh;
+        font-weight: 600;
+    }
+}

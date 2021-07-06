@@ -31,14 +31,19 @@ export default class Socket {
         this.io = new SocketServer(server, { cors: { origin: "*", methods: ["GET", "POST"] } })
         // Socket middleware
         this.io.use((socket, next) => {
-            const type = socket.handshake.auth.type
-            const address = socket.handshake.address
-            if (type !== "remote" && type !== "display") {
-                return next(new Error("unauthorized access"));
-            }
-            this.io.to(socket.id).emit("remote:init", "hahahah");
-            console.log(`[socket] a ${type} is connected from ${address}`)
-            next()
+            this.loadSettings().then((settings) => {
+                const type = socket.handshake.auth.type
+                const address = socket.handshake.address
+                if (type !== "remote" && type !== "display") {
+                    return next(new Error("unauthorized access"));
+                }
+                // Display initialization
+                if (type == "display") {
+                    socket.emit("display:init", settings);
+                }
+                console.log(`[socket] a ${type} is connected from ${address}`)
+                next()
+            })
         })
 
         // Event handling
@@ -53,6 +58,9 @@ export default class Socket {
                     content: undefined,
                     status: "running"
                 }))
+                this.loadSettings().then(result => {
+                    this.settings = result
+                })
             })
             // Select content
             socket.on("lyric:content", data => {
@@ -62,6 +70,9 @@ export default class Socket {
                     content: data,
                     status: this.settings.status
                 }))
+                this.loadSettings().then(result => {
+                    this.settings = result
+                })
             })
             // Stop active lyric
             socket.on("lyric:stop", data => {

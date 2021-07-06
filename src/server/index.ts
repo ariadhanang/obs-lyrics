@@ -28,8 +28,10 @@ server.listen(process.env.PORT, () => {
 		})
 	})
 	app.get('/remote', (req, res) => {
-		// res.send(clientPath)
 		res.sendFile(path.resolve(clientPath + 'remote.html'))
+	})
+	app.get('/display', (req, res) => {
+		res.sendFile(path.resolve(clientPath + 'display.html'))
 	})
 	console.log(`[http] running on port ${process.env.PORT}`)
 })

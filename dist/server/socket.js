@@ -92,14 +92,18 @@ var Socket = (function () {
                         _a.settings = _b.sent();
                         this.io = new socket_io_1.Server(server, { cors: { origin: "*", methods: ["GET", "POST"] } });
                         this.io.use(function (socket, next) {
-                            var type = socket.handshake.auth.type;
-                            var address = socket.handshake.address;
-                            if (type !== "remote" && type !== "display") {
-                                return next(new Error("unauthorized access"));
-                            }
-                            _this.io.to(socket.id).emit("remote:init", "hahahah");
-                            console.log("[socket] a " + type + " is connected from " + address);
-                            next();
+                            _this.loadSettings().then(function (settings) {
+                                var type = socket.handshake.auth.type;
+                                var address = socket.handshake.address;
+                                if (type !== "remote" && type !== "display") {
+                                    return next(new Error("unauthorized access"));
+                                }
+                                if (type == "display") {
+                                    socket.emit("display:init", settings);
+                                }
+                                console.log("[socket] a " + type + " is connected from " + address);
+                                next();
+                            });
                         });
                         this.io.on("connection", function (socket) {
                             socket.on("lyric:select", function (data) {
@@ -109,6 +113,9 @@ var Socket = (function () {
                                     content: undefined,
                                     status: "running"
                                 }));
+                                _this.loadSettings().then(function (result) {
+                                    _this.settings = result;
+                                });
                             });
                             socket.on("lyric:content", function (data) {
                                 _this.io.emit("lyric:content", data);
@@ -117,6 +124,9 @@ var Socket = (function () {
                                     content: data,
                                     status: _this.settings.status
                                 }));
+                                _this.loadSettings().then(function (result) {
+                                    _this.settings = result;
+                                });
                             });
                             socket.on("lyric:stop", function (data) {
                                 _this.io.emit("lyric:stop", data);
