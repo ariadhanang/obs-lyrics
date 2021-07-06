@@ -75,12 +75,13 @@ body {
         height: 100vh;
 
         #page-lyrics {
-            padding: 80px 20px 160px;
+            padding: 80px 20px 200px;
+            overflow-y: auto;
             height: 100%;
         }
 
         #page-lyric {
-            padding: 80px 20px 160px;
+            padding: 80px 20px 200px;
             height: 100%;
         }
 
